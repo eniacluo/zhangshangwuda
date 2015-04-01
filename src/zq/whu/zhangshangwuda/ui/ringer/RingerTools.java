@@ -84,12 +84,34 @@ public class RingerTools
         	Map<String, String> li = mp.get(i);
         	String tstring = li.get("time");
         	
-        	int tstart = Integer.parseInt(tstring.substring(0, tstring.indexOf("-")));
-        	int tend = Integer.parseInt(tstring.substring(tstring.indexOf("-") + 1));
+        	int tstart = 0;
+        	int tend = 0;
+        	
+        	if (tstring.indexOf("节") == -1)
+        	{
+        		tstart = Integer.parseInt(tstring.substring(0, tstring.indexOf("-")));
+        		tend = Integer.parseInt(tstring.substring(tstring.indexOf("-") + 1));
+        	}
+        	else 
+        	{
+        		tstart = Integer.parseInt(tstring.substring(0, tstring.indexOf("-")));
+        		tend = Integer.parseInt(tstring.substring(tstring.indexOf("-") + 1, tstring.indexOf("节")));
+        	}
+        	
         	
         	times.add(new TimeOfLessons(tstart, tend, Integer.parseInt(li.get("day"))));
         }
 		return times;
+	}
+	
+	private int getDayOfWeek(int d)
+	{
+		int day = d + 1;
+		if (day == 8)
+		{
+			day = 1;
+		}
+		return day;
 	}
 	
 	public boolean setTimeOfSilent(boolean mu)
@@ -157,6 +179,7 @@ public class RingerTools
 				mAlarmManager.cancel(PendingIntent.getBroadcast(context, i, intent_on, PendingIntent.FLAG_CANCEL_CURRENT));
 			}
 			cleanNotification(1);
+			return false;
 		}
 		return true;
 	}
