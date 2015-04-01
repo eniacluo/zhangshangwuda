@@ -158,13 +158,12 @@ public class StringUtils {
 	 * @return boolean
 	 */
 	public static boolean isImageUrl(String url) {
-		if(url.endsWith(".jpg"))
-			return true;
-		else if(url.endsWith(".gif"))
-			return true;
-		else if(url.endsWith(".png"))
-			return true;
-		else
+		if(url.contains("qiniu")){	//不接受七牛以外的图片
+			if(url.endsWith(".jpg") || url.endsWith(".gif") || url.endsWith(".png"))
+				return true;
+			else
+				return false;
+		}else
 			return false;
 	}
 

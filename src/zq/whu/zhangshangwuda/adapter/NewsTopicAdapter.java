@@ -71,7 +71,7 @@ public class NewsTopicAdapter extends BaseAdapter {
 		}
 		ImageView img = topicItemView.img;
 		String url = pic.get(position % IMAGE_COUNT).get("image");
-		if (!StringUtils.isEmpty(url))
+		if (!StringUtils.isEmpty(url) && StringUtils.isImageUrl(url))
 			MyApplication.getInstance().mImageLoader.displayImage(url, img);
 		else
 			img.setImageBitmap(failedBitmap);

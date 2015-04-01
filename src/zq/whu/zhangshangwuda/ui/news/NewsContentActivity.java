@@ -211,6 +211,7 @@ public class NewsContentActivity extends BaseThemeSwipeBackSherlockActivity {
 				for (Element content : contents) {
 					if (showImage) {
 						Elements imgs = content.getElementsByTag("img");
+						
 						for (Element img : imgs) {
 							ImageViewFromUrl pic = new ImageViewFromUrl(
 									NewsContentActivity.this);
@@ -224,6 +225,7 @@ public class NewsContentActivity extends BaseThemeSwipeBackSherlockActivity {
 							if (!StringUtils.isEmpty(img.absUrl("src")))
 								pic.load(DisplayTool.getMyImageUrl(img.absUrl("src")), pwidth, pheight);
 							contentLinearLayout.addView(pic);
+							if (BuildConfig.DEBUG) System.out.println("image-url:" + img.absUrl("src"));
 						}
 					}
 					if (!content.text().equals(Jsoup.parse("&nbsp;").text())) {
